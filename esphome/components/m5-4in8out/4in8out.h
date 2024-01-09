@@ -7,9 +7,9 @@
 namespace esphome {
 namespace m5stack {
 
-class 4In8OutComponent : public Component, public i2c::I2CDevice {
+class FourIn8OutComponent : public Component, public i2c::I2CDevice {
  public:
-  4In8OutComponent() = default;
+  FourIn8OutComponent() = default;
 
   /// Check i2c availability and setup masks
   void setup() override;
@@ -35,7 +35,7 @@ class 4In8OutComponent : public Component, public i2c::I2CDevice {
 };
 
 /// Helper class to expose an m5stack 4in8out pin as an internal GPIO pin.
-class 4In8OutGPIOPin : public GPIOPin {
+class FourIn8OutGPIOPin : public GPIOPin {
  public:
   void setup() override;
   void pin_mode(gpio::Flags flags) override;
@@ -49,7 +49,7 @@ class 4In8OutGPIOPin : public GPIOPin {
   void set_flags(gpio::Flags flags) { flags_ = flags; }
 
  protected:
-  4In8OutComponent *parent_;
+  FourIn8OutComponent *parent_;
   uint8_t pin_;
   bool inverted_;
   gpio::Flags flags_;
