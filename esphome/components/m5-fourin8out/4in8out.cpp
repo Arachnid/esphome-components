@@ -4,7 +4,7 @@
 namespace esphome {
 namespace m5stack {
 
-enum FourIn8OutRegisters {
+enum FourIn8OutRegisters : uint8_t {
   FOURIN8OUT_INPUT0 = 0x10,
   FOURIN8OUT_OUTPUT0 = 0x20,
   FOURIN8OUT_FIRMWARE_VERSION = 0xFE,
