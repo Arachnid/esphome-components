@@ -17,9 +17,9 @@ DEPENDENCIES = ["i2c"]
 MULTI_CONF = True
 FourIn8Out_ns = cg.esphome_ns.namespace("4in8out")
 
-FourIn8OutComponent = FourIn8Out_ns.class_("4In8OutComponent", cg.Component, i2c.I2CDevice)
+FourIn8OutComponent = FourIn8Out_ns.class_("FourIn8OutComponent", cg.Component, i2c.I2CDevice)
 FourIn8OutGPIOPin = FourIn8Out_ns.class_(
-    "4In8OutGPIOPin", cg.GPIOPin, cg.Parented.template(FourIn8OutComponent)
+    "FourIn8OutGPIOPin", cg.GPIOPin, cg.Parented.template(FourIn8OutComponent)
 )
 
 CONF_4In8Out = "4in8out"
