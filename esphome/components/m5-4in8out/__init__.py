@@ -22,7 +22,7 @@ FourIn8OutGPIOPin = FourIn8Out_ns.class_(
     "4In8OutGPIOPin", cg.GPIOPin, cg.Parented.template(FourIn8OutComponent)
 )
 
-CONF_4In8Out = "4In8Out"
+CONF_4In8Out = "4in8out"
 CONFIG_SCHEMA = (
     cv.Schema({cv.Required(CONF_ID): cv.declare_id(FourIn8OutComponent)})
     .extend(cv.COMPONENT_SCHEMA)
