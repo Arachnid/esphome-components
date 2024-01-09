@@ -7,9 +7,9 @@
 namespace esphome {
 namespace m5stack {
 
-class FourIn8OutComponent : public Component, public i2c::I2CDevice {
+class TwoRelayComponent : public Component, public i2c::I2CDevice {
  public:
-  FourIn8OutComponent() = default;
+  TwoRelayComponent() = default;
 
   /// Check i2c availability and setup masks
   void setup() override;
@@ -19,7 +19,7 @@ class FourIn8OutComponent : public Component, public i2c::I2CDevice {
   void digital_write(uint8_t pin, bool value);
   /// Helper function to set the pin mode of a pin.
   void pin_mode(uint8_t pin, gpio::Flags flags);
-
+  
   float get_setup_priority() const override;
 
   void dump_config() override;
@@ -33,7 +33,7 @@ class FourIn8OutComponent : public Component, public i2c::I2CDevice {
 };
 
 /// Helper class to expose an m5stack 4in8out pin as an internal GPIO pin.
-class FourIn8OutGPIOPin : public GPIOPin {
+class TwoRelayGPIOPin : public GPIOPin {
  public:
   void setup() override;
   void pin_mode(gpio::Flags flags) override;
@@ -41,13 +41,13 @@ class FourIn8OutGPIOPin : public GPIOPin {
   void digital_write(bool value) override;
   std::string dump_summary() const override;
 
-  void set_parent(FourIn8OutComponent *parent) { parent_ = parent; }
+  void set_parent(TwoRelayComponent *parent) { parent_ = parent; }
   void set_pin(uint8_t pin) { pin_ = pin; }
   void set_inverted(bool inverted) { inverted_ = inverted; }
   void set_flags(gpio::Flags flags) { flags_ = flags; }
 
  protected:
-  FourIn8OutComponent *parent_;
+  TwoRelayComponent *parent_;
   uint8_t pin_;
   bool inverted_;
   gpio::Flags flags_;
