@@ -4,12 +4,10 @@ from esphome import pins
 from esphome.components import i2c
 from esphome.const import (
     CONF_ID,
-    CONF_INPUT,
     CONF_NUMBER,
     CONF_MODE,
     CONF_INVERTED,
     CONF_OUTPUT,
-    CONF_PULLUP,
 )
 
 CODEOWNERS = ["@arachnid"]
@@ -22,7 +20,7 @@ TwoRelayGPIOPin = M5Stack_ns.class_(
     "TwoRelayGPIOPin", cg.GPIOPin, cg.Parented.template(TwoRelayComponent)
 )
 
-CONF_TwoRelay = "tworelay"
+CONF_TWORELAY = "tworelay"
 CONFIG_SCHEMA = (
     cv.Schema({cv.Required(CONF_ID): cv.declare_id(TwoRelayComponent)})
     .extend(cv.COMPONENT_SCHEMA)
@@ -37,17 +35,15 @@ async def to_code(config):
 
 
 def validate_mode(value):
-    if not (value[CONF_INPUT] or value[CONF_OUTPUT]):
-        raise cv.Invalid("Mode must be either input or output")
-    if value[CONF_INPUT] and value[CONF_OUTPUT]:
-        raise cv.Invalid("Mode must be either input or output")
+    if not (value[CONF_OUTPUT]):
+        raise cv.Invalid("Mode must be output")
     return value
 
 
-TwoRelay_PIN_SCHEMA = cv.All(
+TWORELAY_PIN_SCHEMA = cv.All(
     {
         cv.GenerateID(): cv.declare_id(TwoRelayGPIOPin),
-        cv.Required(CONF_TwoRelay): cv.use_id(TwoRelayComponent),
+        cv.Required(CONF_TWORELAY): cv.use_id(TwoRelayComponent),
         cv.Required(CONF_NUMBER): cv.int_range(min=0, max=2),
         cv.Optional(CONF_MODE, default={}): cv.All(
             {
@@ -60,10 +56,10 @@ TwoRelay_PIN_SCHEMA = cv.All(
 )
 
 
-@pins.PIN_SCHEMA_REGISTRY.register(CONF_TwoRelay, TwoRelay_PIN_SCHEMA)
+@pins.PIN_SCHEMA_REGISTRY.register(CONF_TWORELAY, TWORELAY_PIN_SCHEMA)
 async def TwoRelay_pin_to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
-    parent = await cg.get_variable(config[CONF_TwoRelay])
+    parent = await cg.get_variable(config[CONF_TWORELAY])
 
     cg.add(var.set_parent(parent))
 
