@@ -23,14 +23,6 @@ void FourIn8OutComponent::setup() {
     return;
   }
 
-  // Read current register states
-  for(uint i = 0; i < 4; i++) {
-    this->read_register_(FOURIN8OUT_INPUT0 + i, &this->inputs[i]);
-  }
-  for(uint i = 0; i < 8; i++) {
-    this->read_register_(FOURIN8OUT_OUTPUT0 + i, &this->outputs[i]);
-  }
-
   ESP_LOGD(TAG, "Initialization complete. Warning: %d, Error: %d", this->status_has_warning(),
            this->status_has_error());
 }

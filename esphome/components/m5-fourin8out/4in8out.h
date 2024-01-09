@@ -27,9 +27,6 @@ class FourIn8OutComponent : public Component, public i2c::I2CDevice {
   bool write_register_(uint8_t reg, uint8_t value);
   void update_register_(uint8_t pin, bool pin_value, uint8_t reg_addr);
 
-  uint8_t inputs_[4] = {0x00, 0x00, 0x00, 0x00};
-  uint8_t outputs_[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-
   /// Storage for last I2C error seen
   esphome::i2c::ErrorCode last_error_;
 };
