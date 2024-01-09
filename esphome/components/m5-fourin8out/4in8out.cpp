@@ -40,14 +40,14 @@ bool FourIn8OutComponent::digital_read(uint8_t pin) {
   if(pin < 4) {
     this->read_register_(FOURIN8OUT_INPUT0 + pin, &value);
   } else {
-    this->read_register(FOURIN8OUT_OUTPUT0 + (pin - 4), &value);
+    this->read_register_(FOURIN8OUT_OUTPUT0 + (pin - 4), &value);
   }
   return value;
 }
 
 void FourIn8OutComponent::digital_write(uint8_t pin, bool value) {
   if(pin < 4) {
-    ESP_LOGE("Cannot write to a FourIn8Out input pin");
+    ESP_LOGE(TAG, "Cannot write to a FourIn8Out input pin");
   } else {
     this->write_register_(FOURIN8OUT_OUTPUT0 + (pin - 4), value);
   }
@@ -55,9 +55,9 @@ void FourIn8OutComponent::digital_write(uint8_t pin, bool value) {
 
 void FourIn8OutComponent::pin_mode(uint8_t pin, gpio::Flags flags) {
   if (flags == gpio::FLAG_INPUT && pin >= 4) {
-    ESP_LOGE("FourIn8Out pin %d is output only", pin);
+    ESP_LOGE(TAG, "FourIn8Out pin %d is output only", pin);
   } else if(flags == gpio::FLAG_OUTPUT && pin < 4) {
-    ESP_LOGE("FourIn8Out pin %d is input only", pin);
+    ESP_LOGE(TAG, "FourIn8Out pin %d is input only", pin);
   }
 }
 
