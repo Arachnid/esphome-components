@@ -15,10 +15,10 @@ from esphome.const import (
 CODEOWNERS = ["@arachnid"]
 DEPENDENCIES = ["i2c"]
 MULTI_CONF = True
-FourIn8Out_ns = cg.esphome_ns.namespace("fourin8out")
+M5Stack_ns = cg.esphome_ns.namespace("m5stack")
 
-FourIn8OutComponent = FourIn8Out_ns.class_("FourIn8OutComponent", cg.Component, i2c.I2CDevice)
-FourIn8OutGPIOPin = FourIn8Out_ns.class_(
+FourIn8OutComponent = M5Stack_ns.class_("FourIn8OutComponent", cg.Component, i2c.I2CDevice)
+FourIn8OutGPIOPin = M5Stack_ns.class_(
     "FourIn8OutGPIOPin", cg.GPIOPin, cg.Parented.template(FourIn8OutComponent)
 )
 
