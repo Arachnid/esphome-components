@@ -15,14 +15,14 @@ from esphome.const import (
 CODEOWNERS = ["@arachnid"]
 DEPENDENCIES = ["i2c"]
 MULTI_CONF = True
-FourIn8Out_ns = cg.esphome_ns.namespace("4in8out")
+FourIn8Out_ns = cg.esphome_ns.namespace("fourin8out")
 
 FourIn8OutComponent = FourIn8Out_ns.class_("FourIn8OutComponent", cg.Component, i2c.I2CDevice)
 FourIn8OutGPIOPin = FourIn8Out_ns.class_(
     "FourIn8OutGPIOPin", cg.GPIOPin, cg.Parented.template(FourIn8OutComponent)
 )
 
-CONF_4In8Out = "4in8out"
+CONF_FOURIN8OUT = "fourin8out"
 CONFIG_SCHEMA = (
     cv.Schema({cv.Required(CONF_ID): cv.declare_id(FourIn8OutComponent)})
     .extend(cv.COMPONENT_SCHEMA)
@@ -47,7 +47,7 @@ def validate_mode(value):
 FourIn8Out_PIN_SCHEMA = cv.All(
     {
         cv.GenerateID(): cv.declare_id(FourIn8OutGPIOPin),
-        cv.Required(CONF_4In8Out): cv.use_id(FourIn8OutComponent),
+        cv.Required(CONF_FOURIN8OUT): cv.use_id(FourIn8OutComponent),
         cv.Required(CONF_NUMBER): cv.int_range(min=0, max=12),
         cv.Optional(CONF_MODE, default={}): cv.All(
             {
@@ -61,10 +61,10 @@ FourIn8Out_PIN_SCHEMA = cv.All(
 )
 
 
-@pins.PIN_SCHEMA_REGISTRY.register(CONF_4In8Out, FourIn8Out_PIN_SCHEMA)
+@pins.PIN_SCHEMA_REGISTRY.register(CONF_FOURIN8OUT, FourIn8Out_PIN_SCHEMA)
 async def FourIn8Out_pin_to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
-    parent = await cg.get_variable(config[CONF_4In8Out])
+    parent = await cg.get_variable(config[CONF_FOURIN8OUT])
 
     cg.add(var.set_parent(parent))
 
