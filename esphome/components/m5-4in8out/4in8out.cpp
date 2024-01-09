@@ -1,4 +1,4 @@
-#include "pca6416a.h"
+#include "4in8out.h"
 #include "esphome/core/log.h"
 
 namespace esphome {
