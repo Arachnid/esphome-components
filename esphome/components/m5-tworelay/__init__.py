@@ -22,7 +22,7 @@ TwoRelayGPIOPin = M5Stack_ns.class_(
     "TwoRelayGPIOPin", cg.GPIOPin, cg.Parented.template(TwoRelayComponent)
 )
 
-CONF_TwoRelay = "TwoRelay"
+CONF_TwoRelay = "tworelay"
 CONFIG_SCHEMA = (
     cv.Schema({cv.Required(CONF_ID): cv.declare_id(TwoRelayComponent)})
     .extend(cv.COMPONENT_SCHEMA)
