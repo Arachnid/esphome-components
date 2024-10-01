@@ -21,14 +21,9 @@ HBridgeDirection = M5Stack_ns.class_(
     "HBridgeDirection", cg.Component
 )
 
-CONFIG_SCHEMA = {
+CONFIG_SCHEMA = select.select_schema(HBridgeDirection, entity_category=ENTITY_CATEGORY_CONFIG).extend({
     cv.GenerateID(CONF_HBRIDGE_ID): cv.use_id(HBridgeComponent),
-    cv.Required(CONF_DIRECTION): select.select_schema(
-        HBridgeDirection,
-        entity_category=ENTITY_CATEGORY_CONFIG
-    )
-}
-
+})
 
 async def to_code(config):
     parent = await cg.get_variable(config[CONF_HBRIDGE_ID])
