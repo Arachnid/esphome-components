@@ -14,7 +14,7 @@ CONF_DIRECTION = "direction"
 CONF_SELECTS = [
     "Stop",
     "Forward",
-    "Reverse",
+    "Back",
 ]
 
 HBridgeDirection = M5Stack_ns.class_(
