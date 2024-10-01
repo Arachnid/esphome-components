@@ -7,7 +7,7 @@ from esphome.const import (
 )
 from . import HBridgeComponent, M5Stack_ns
 
-DEPENDENCIES = ["m5-hbridge", "select"]
+DEPENDENCIES = ["m5-hbridge"]
 
 CONF_HBRIDGE_ID = "hbridge_id"
 CONF_DIRECTION = "direction"

@@ -7,7 +7,7 @@ from esphome.const import (
 )
 
 CODEOWNERS = ["@arachnid"]
-DEPENDENCIES = ["i2c", "select"]
+DEPENDENCIES = ["i2c"]
 MULTI_CONF = True
 M5Stack_ns = cg.esphome_ns.namespace("m5stack")
 
