@@ -35,7 +35,7 @@ class HBridgeComponent : public Component, public i2c::I2CDevice {
   void dump_config() override;
 
  protected:
-  bool HBridgeComponent::write_driver_config_();
+  bool write_driver_config_();
 
   /// Storage for last I2C error seen
   esphome::i2c::ErrorCode last_error_;
