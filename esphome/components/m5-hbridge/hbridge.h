@@ -18,7 +18,7 @@ enum Direction: uint8_t {
 
 static const std::map<std::string, enum Direction> DIRECTION_STRING_TO_ENUM{
     {"Stop", DIRECTION_Stop}, {"Forward", DIRECTION_Forward}, {"Back", DIRECTION_Back}};
-static const std::string ENUM_TO_DIRECTION_STRING = {"Stop" ,"Forward", "Back"};
+static const std::string ENUM_TO_DIRECTION_STRING[] = {"Stop" ,"Forward", "Back"};
 
 class HBridgeComponent : public Component, public i2c::I2CDevice {
  public:
