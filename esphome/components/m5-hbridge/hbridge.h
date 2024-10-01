@@ -4,18 +4,19 @@
 #include "esphome/core/hal.h"
 #include "esphome/components/i2c/i2c.h"
 #include "esphome/components/output/float_output.h"
+#include "esphome/components/select/select.h"
 #include <map>
 
 namespace esphome {
 namespace m5stack {
 
 enum Direction: uint8_t {
-    DIRECTION_Stop = 0,
-    DIRECTION_Forward = 1,
-    DIRECTION_Back = 2
-}
+    DIRECTION_Stop,
+    DIRECTION_Forward,
+    DIRECTION_Back
+};
 
-static const std::map<std::string, Direction> DIRECTION_STRING_TO_ENUM{
+static const std::map<std::string, enum Direction> DIRECTION_STRING_TO_ENUM{
     {"Stop", DIRECTION_Stop}, {"Forward", DIRECTION_Forward}, {"Back", DIRECTION_Back}};
 
 class HBridgeComponent : public Component, public i2c::I2CDevice {
