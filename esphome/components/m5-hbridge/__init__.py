@@ -6,6 +6,7 @@ from esphome.const import (
     CONF_ID,
 )
 
+AUTO_LOAD = ["output", "direction"]
 CODEOWNERS = ["@arachnid"]
 DEPENDENCIES = ["i2c"]
 MULTI_CONF = True
