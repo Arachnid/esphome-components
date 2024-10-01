@@ -38,7 +38,7 @@ void HBridgeComponent::dump_config() {
 }
 
 bool HBridgeComponent::set_speed(float value) {
-    duty_ = (uint8_t)value * 255;
+    duty_ = (uint8_t)(value * 255);
     return this->write_driver_config_();
 }
 
@@ -53,7 +53,7 @@ bool HBridgeComponent::write_driver_config_() {
     return false;
   }
 
-  ESP_LOGD(TAG, "Setting motor to %d %s", duty_, ENUM_TO_DIRECTION_STRING[dir_]);
+  ESP_LOGD(TAG, "Setting motor to %d %d", duty_, dir_);
 
   uint8_t value[] = {dir_, duty_};
   if ((this->last_error_ = this->write_register(HBridge_DRIVER_CONFIG, value, 2, true)) != esphome::i2c::ERROR_OK) {
