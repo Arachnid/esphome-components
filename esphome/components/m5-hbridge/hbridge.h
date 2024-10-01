@@ -28,15 +28,14 @@ class HBridgeComponent : public Component, public i2c::I2CDevice {
 
   /// Helper function to write speed
   bool set_speed(float value);
-  void set_direction(Direction dir);
+  bool set_direction(Direction dir);
 
   float get_setup_priority() const override;
 
   void dump_config() override;
 
  protected:
-  bool read_register_(uint8_t reg, uint8_t *value);
-  bool write_register_(uint8_t reg, uint8_t value);
+  bool HBridgeComponent::write_driver_config_();
 
   /// Storage for last I2C error seen
   esphome::i2c::ErrorCode last_error_;
@@ -58,7 +57,7 @@ class HBridgeDirection : public Component, public select::Select, public Parente
 
  protected:
   void control(const std:: string &value) override;
-}
+};
 
 }  // namespace m5stack
 }  // namespace esphome
