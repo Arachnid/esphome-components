@@ -53,7 +53,9 @@ bool HBridgeComponent::write_driver_config_() {
     return false;
   }
 
-  uint8_t value[] = {(uint8_t)dir_, duty_};
+  ESP_LOGD(TAG, "Setting motor to %d %s", duty_, ENUM_TO_DIRECTION_STRING[dir_])
+
+  uint8_t value[] = {dir_, duty_};
   if ((this->last_error_ = this->write_register(HBridge_DRIVER_CONFIG, value, 2, true)) != esphome::i2c::ERROR_OK) {
     this->status_set_warning();
     ESP_LOGE(TAG, "write_register_(): I2C I/O error: %d", (int) this->last_error_);
