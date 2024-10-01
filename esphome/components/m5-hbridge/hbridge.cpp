@@ -19,7 +19,7 @@ void HBridgeComponent::setup() {
   ESP_LOGCONFIG(TAG, "Setting up m5stack HBridge...");
   // Test to see if device exists
   uint8_t value;
-  if (!this->read_register_(HBridge_ADDRESS, &value)) {
+  if ((this->last_error_ = this->read_register(HBridge_ADDRESS, &value, 1, true)) != esphome::i2c::ERROR_OK) {
     ESP_LOGE(TAG, "HBridge not available under 0x%02X", this->address_);
     this->mark_failed();
     return;
@@ -53,7 +53,7 @@ bool HBridgeComponent::write_driver_config_() {
     return false;
   }
 
-  uint8_t[] value = [(uint8_t)dir_, duty_];
+  uint8_t value[] = {(uint8_t)dir_, duty_};
   if ((this->last_error_ = this->write_register(HBridge_DRIVER_CONFIG, &value, 2, true)) != esphome::i2c::ERROR_OK) {
     this->status_set_warning();
     ESP_LOGE(TAG, "write_register_(): I2C I/O error: %d", (int) this->last_error_);
