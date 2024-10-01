@@ -3,14 +3,16 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 #include "esphome/components/i2c/i2c.h"
+#include "esphome/components/output/float_output.h"
+#include <map>
 
 namespace esphome {
 namespace m5stack {
 
 enum Direction: uint8_t {
-    DIRECTION_Stop = 0;
-    DIRECITON_Forward = 1;
-    DIRECTION_Back = 2;
+    DIRECTION_Stop = 0,
+    DIRECTION_Forward = 1,
+    DIRECTION_Back = 2
 }
 
 static const std::map<std::string, Direction> DIRECTION_STRING_TO_ENUM{
