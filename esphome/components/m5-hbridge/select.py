@@ -26,7 +26,6 @@ CONFIG_SCHEMA = select.select_schema(HBridgeDirection, entity_category=ENTITY_CA
 })
 
 async def to_code(config):
-    parent = await cg.get_variable(config[CONF_HBRIDGE_ID])
     sel = await select.new_select(config, options=[CONF_SELECTS])
     await cg.register_parented(sel, config[CONF_HBRIDGE_ID])
     cg.add(parent.set_direction_select(sel))
