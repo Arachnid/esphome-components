@@ -15,8 +15,12 @@ M5Stack_ns = cg.esphome_ns.namespace("m5stack")
 HBridgeComponent = M5Stack_ns.class_("HBridgeComponent", cg.Component, i2c.I2CDevice)
 
 CONF_HBRIDGE = "hbridge"
+CONF_FREQUENCY = "frequency"
 CONFIG_SCHEMA = (
-    cv.Schema({cv.Required(CONF_ID): cv.declare_id(HBridgeComponent)})
+    cv.Schema({
+        cv.Required(CONF_ID): cv.declare_id(HBridgeComponent),
+        cv.Optional(CONF_FREQUENCY, default=1000): cv.int_range(1000, 10000),
+    })
     .extend(cv.COMPONENT_SCHEMA)
     .extend(i2c.i2c_device_schema(0x20))
 )

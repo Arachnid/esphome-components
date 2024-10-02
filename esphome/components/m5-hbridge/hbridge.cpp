@@ -38,12 +38,17 @@ void HBridgeComponent::dump_config() {
 }
 
 bool HBridgeComponent::set_speed(float value) {
-    duty_ = (uint8_t)(value * 255);
+    duty_ = (uint8_t)(value * 65535);
     return this->write_driver_config_();
 }
 
 bool HBridgeComponent::set_direction(Direction dir) {
     dir_ = dir;
+    return this->write_driver_config_();
+}
+
+bool HBridgeComponent::set_frequency(uint16_t freq) {
+    frequency_ = freq;
     return this->write_driver_config_();
 }
 
@@ -55,8 +60,8 @@ bool HBridgeComponent::write_driver_config_() {
 
   ESP_LOGD(TAG, "Setting motor to %d %s", duty_, ENUM_TO_DIRECTION_STRING[dir_].c_str());
 
-  uint8_t value[] = {dir_, duty_};
-  if ((this->last_error_ = this->write_register(HBridge_DRIVER_CONFIG, value, 2, true)) != esphome::i2c::ERROR_OK) {
+  uint8_t value[] = {dir_, 0, duty_ % 256, duty_ / 256, frequency_ % 256, frequency_ / 256};
+  if ((this->last_error_ = this->write_register(HBridge_DRIVER_CONFIG, value, 6, true)) != esphome::i2c::ERROR_OK) {
     this->status_set_warning();
     ESP_LOGE(TAG, "write_register_(): I2C I/O error: %d", (int) this->last_error_);
     return false;

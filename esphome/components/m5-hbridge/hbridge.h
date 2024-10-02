@@ -30,6 +30,7 @@ class HBridgeComponent : public Component, public i2c::I2CDevice {
   /// Helper function to write speed
   bool set_speed(float value);
   bool set_direction(Direction dir);
+  bool set_frequency(uint16_t freq);
 
   float get_setup_priority() const override;
 
@@ -41,8 +42,9 @@ class HBridgeComponent : public Component, public i2c::I2CDevice {
   /// Storage for last I2C error seen
   esphome::i2c::ErrorCode last_error_;
 
-  uint8_t duty_;
+  uint16_t duty_;
   Direction dir_;
+  uint16_t frequency_;
 };
 
 /// Helper class to expose an m5stack 4in8out pin as an internal GPIO pin.
