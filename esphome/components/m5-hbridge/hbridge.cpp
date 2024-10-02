@@ -38,7 +38,7 @@ void HBridgeComponent::dump_config() {
 }
 
 bool HBridgeComponent::set_speed(float value) {
-    duty_ = (uint8_t)(value * 65535);
+    duty_ = (uint16_t)(value * 65535);
     return this->write_driver_config_();
 }
 
