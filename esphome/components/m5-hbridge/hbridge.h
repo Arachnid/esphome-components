@@ -42,9 +42,9 @@ class HBridgeComponent : public Component, public i2c::I2CDevice {
   /// Storage for last I2C error seen
   esphome::i2c::ErrorCode last_error_;
 
-  uint16_t duty_;
-  Direction dir_;
-  uint16_t frequency_;
+  uint16_t duty_ = 0;
+  Direction dir_ = DIRECTION_Forward;
+  uint16_t frequency_ = 1000;
 };
 
 /// Helper class to expose an m5stack 4in8out pin as an internal GPIO pin.
